@@ -19,6 +19,7 @@ log in to your account (if you're not registered then go and create your account
  (Add Firebase to your web app)
 * From the modal window that appears, copy the following configuration keys and values
 
+Please set your firebase configuration in index.html : 
 ```bash
 apiKey: "***************************************",
 authDomain: "*****-*****.firebaseapp.com",
