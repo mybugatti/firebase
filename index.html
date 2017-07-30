@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase Web</title>
+
+    <style media="screen">
+        body{
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #uploader{
+            -webkit-appearance: none;
+            appearance:none;
+            width: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <progress value="0" max="100" id="uploader">0%</progress>
+    <input type="file" value="upload" id="fileButton">
+
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script>
+
+        var config = {
+            apiKey: "*********************************",
+            authDomain: "***-***.firebaseapp.com",
+            databaseURL: "https://*****-****.firebaseio.com",
+            projectId: "******-***",
+            storageBucket: "***-***.appspot.com",
+            messagingSenderId: "**********"
+        };
+        firebase.initializeApp(config);
+
+        // GET
+        var uploader = document.getElementById("uploader"),
+            fileButton = document.getElementById("fileButton");
+
+        // LISTEN
+        fileButton.addEventListener('change', function (e) {
+
+            //GET FILE
+            var file = e.target.files[0];
+
+            //CREATE
+            var storage = firebase.storage().ref("upload_files/"+file.name)
+
+            //UPLOAD FILE
+            var task = storage.put(file);
+
+            //UPLOAD PROOGRESS
+            task.on('state_changed',
+
+                function progress(snapshot){
+
+                    var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+                    uploader.value = percentage;
+                },
+
+                function error(e){
+                    console.log(e)
+                },
+
+                function complete(){
+
+                }
+
+            );
+
+        });
+    </script>
+
+</body>
+</html>
