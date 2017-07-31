@@ -31,3 +31,5 @@ messagingSenderId: "*******"
 * Once copied paste these configuration keys/values into a file
 
 More info on this can be found on the Firebase [Getting Started](https://firebase.google.com/) page.
+
+Enjoy 
